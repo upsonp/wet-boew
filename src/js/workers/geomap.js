@@ -24,7 +24,7 @@
 	/* local reference */
 	_pe.fn.geomap = {
 		type: 'plugin',				
-		depends: ['openlayers', 'proj4js'],
+		depends: ['openlayers', 'proj4js', 'colorbox'],
 		polyfills: ['detailssummary'],
 		debug: false,
 		_exec: function(elm) {	
@@ -220,30 +220,49 @@
 		 *	Select and unselect map feature on click
 		 */
 		onFeatureClick: function(feature) {
-			
+			var opts;
+			// Defaults
+			opts = {};
+						
 			if (typeof feature._lastHighlighter !== 'undefined') {
 				selectControl.unselect(feature);
 			} else {
 				selectControl.select(feature);				
 				
 				if (feature.layer.popups !== undefined) {
-					
+					_pe.fn.geomap.createPopup2(feature);
+					//_pe.fn.lightbox._init_colorbox($(".wet-boew-geomap"), opts);
+
 					// If a popup is already shown, hide it
-					if (selectedFeature !== undefined && selectedFeature.popup !== null && selectedFeature.popup.visible()) {
+/*					if (selectedFeature !== undefined && selectedFeature.popup !== null && selectedFeature.popup.visible()) {
 						selectedFeature.popup.hide();
 					}
 				
 					// If no popup, create it, otherwise show it.
 					selectedFeature = feature;
 					if (feature.popup === null) {
-						_pe.fn.geomap.createPopup(feature);
+						//_pe.fn.geomap.createPopup(feature);
 					} else {
 						feature.popup.toggle();
 					}
-				}	
+*/				}	
 			}
 		},
 		
+		createPopup2: function(feature) {
+			alert("Feature selected");
+			/*var copts;
+			
+			copts = {
+				title: $('#' +feature.layer.name).attr('aria-label'),
+				width: "80%",
+				height: "80%",
+				html: "<div class=\"span-6 margin-top-medium\"><h3>"+title+"</h3></div>"
+				};
+
+			$(".wet-boew-geomap").colorbox(copts);*/
+			
+		},
 		/*
 		 *	Create popup
 		 */
